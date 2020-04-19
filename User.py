@@ -1,27 +1,28 @@
 import csv
 
+class User:
 
-class Filehandler:
+    def inputResult(self):
+        self.User = User
+        self.username = str(input('Please insert your username: '))
+        self.password = str(input('Please insert your password: '))
 
-    def load_from_cvs(file_name):
-        try:
-            with open(file_name[0]) as csv_file:
-                csv_reader = csv.reader(csv_file)
-                for row in csv_reader:
-                        users = {
-                            "id": row[0],
-                            "first name": row[1],
-                            "last name": row[2],
-                            "password": row[3],
-                            "position": row[4],
-                            "salary": row[5],
-                            "role": row[6],
-                        }
-                        self.users.append(users)
+    def user_auth(username, password):
+        with open("/Users/selimmizrahi/Desktop/Python_Mini_Project/cvs_file/user.csv") as csv_file:
+            csv_reader = csv.reader(csv_file)
+            access = False
+            user_role = ' '
+            for row in csv_reader:
+                if username.lower() == row[1] and password.lower() == row[3]:
+                    access = True
+                    user_role = str(row[6])
+            if access:
+                print('Access Granted')
+                print(f'Your role is {user_role}')
+                return access
+            else:
+                print('Access Denied')
+                return access
 
-        except Exception as error:
-            print("Hi Error, Welcome!" + str(error))
-
-file = Filehandler()
-file.load_from_cvs("/Users/selimmizrahi/Desktop/Python_Mini_Project/cvs_file/user.csv")
-print(file.users)
+User.inputResult(User)
+User.user_auth(User.username, User.password)
