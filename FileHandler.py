@@ -1,5 +1,6 @@
 import csv
 from csv import writer
+from csv import DictWriter
 
 
 class File_handler:
@@ -23,17 +24,17 @@ class File_handler:
             print("There is an error :" + str(error))
 
     def append_to_csv(self, data):
-        try:
+        # try:
             for row in self.data:
-                if row.get("id") == data[0]:
+                if row.get("id") == data.get("id"):
                     raise Exception("This ID already exists")
 
             with open(self.file_name, 'a+', newline='') as write_obj:
-                csv_writer = writer(write_obj)
-                csv_writer.writerow(data)
-
-        except Exception as error:
-            print("There is an error :" + str(error))
+                dict_writer = DictWriter(write_obj, fieldnames = data)
+                dict_writer.writerow(data)
+        #
+        # except Exception as error:
+        #     print("There is an error :" + str(error))
 
     def remove_from_csv(self, id):
         try:
@@ -82,9 +83,10 @@ class File_handler:
         # except Exception as error:
         #     print("There is an error :" + str(error))
 
-data_input = ['8', 'gabriel', 'Berg', 'password', 'student', 100, 'teacher']
+
+data_input = {'id': '20', 'first': 'Selim', 'last': 'Berg', 'password': 'password', 'position': 'admin','salary': '100','role': 'teacher'}
 file = File_handler('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
-file.append_to_csv(data_input)
+# file.append_to_csv(data_input)
 # file.load_from_csv('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
 # file.remove_from_csv('20')
 # file.update_csv('15', data_input)
