@@ -64,9 +64,22 @@ class Carlot:
             print(error)
             raise
 
+    def get_fleet_size(self):
+        try:
+            vehicle_path = os.path.join('/Users/selimmizrahi/Desktop/Python_Mini_Project/vehicle.csv')
+            self.file_handler.load_from_csv(vehicle_path)
+            print("There are " + str(len(self.file_handler.data)) + " cars")
+            return len(self.file_handler.data)
+
+        except Exception as error:
+            print(error)
+            raise
+
+
 # carlot = Carlot('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
 carlot = Carlot('/Users/selimmizrahi/Desktop/Python_Mini_Project/vehicle.csv')
 # carlot.update_salary_by_name("3000", "Hen")
-carlot.add_to_fleet('/Users/selimmizrahi/Desktop/Python_Mini_Project/external_file.csv')
+# carlot.add_to_fleet('/Users/selimmizrahi/Desktop/Python_Mini_Project/external_file.csv')
+carlot.get_fleet_size()
 
 
