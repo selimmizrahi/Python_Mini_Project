@@ -1,6 +1,8 @@
+import os
 from FileHandler import File_handler
 from User import User
-import os
+# from csv import DictWriter
+import csv
 
 
 class Carlot:
@@ -35,5 +37,36 @@ class Carlot:
         else:
             return False
 
-carlot = Carlot('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
-carlot.update_salary_by_name("3000", "Hen")
+    def add_to_fleet(self, external_file):
+        try:
+            with open(external_file, "r") as csv_external:
+                csv_reader = csv.reader(csv_external)
+                external_headers = next(csv_reader)
+
+            with open("/Users/selimmizrahi/Desktop/Python_Mini_Project/vehicle.csv", "r") as csv_file:
+                csv_reader = csv.reader(csv_file)
+                internal_headers = next(csv_reader)
+
+            if external_headers != internal_headers:
+                return False
+
+            external_data = open(external_file, "r")
+            internal_data = open("/Users/selimmizrahi/Desktop/Python_Mini_Project/vehicle.csv", "r").readlines()
+
+            if external_data != internal_data:
+                with open("/Users/selimmizrahi/Desktop/Python_Mini_Project/vehicle.csv", "a") as csv_append:
+                    next(external_data)
+                    for row in external_data:
+                        csv_append.writelines(row)
+                return True
+
+        except Exception as error:
+            print(error)
+            raise
+
+# carlot = Carlot('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
+carlot = Carlot('/Users/selimmizrahi/Desktop/Python_Mini_Project/vehicle.csv')
+# carlot.update_salary_by_name("3000", "Hen")
+carlot.add_to_fleet('/Users/selimmizrahi/Desktop/Python_Mini_Project/external_file.csv')
+
+
