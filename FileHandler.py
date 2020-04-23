@@ -3,6 +3,7 @@ from csv import writer
 from csv import DictWriter
 
 
+
 class File_handler:
     data = None
 
@@ -16,7 +17,7 @@ class File_handler:
         try:
             self.data = []
             with open(file_name, 'r') as csv_file:
-                csv_reader = csv.DictReader(csv_file, delimiter=',')
+                csv_reader = csv.DictReader(csv_file, delimiter = ',')
                 for line in csv_reader:
                     self.data.append(line)
 
@@ -84,8 +85,8 @@ class File_handler:
         #     print("There is an error :" + str(error))
 
 
-data_input = {'id': '20', 'first': 'Selim', 'last': 'Berg', 'password': 'password', 'position': 'admin','salary': '100','role': 'teacher'}
-file = File_handler('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
+# data_input = {'id': '20', 'first': 'Selim', 'last': 'Berg', 'password': 'password', 'position': 'admin','salary': '100','role': 'teacher'}
+# file = File_handler('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
 # file.append_to_csv(data_input)
 # file.load_from_csv('/Users/selimmizrahi/Desktop/Python_Mini_Project/user.csv')
 # file.remove_from_csv('20')
